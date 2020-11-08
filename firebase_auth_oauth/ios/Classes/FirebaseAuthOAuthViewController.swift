@@ -53,7 +53,8 @@ public class FirebaseAuthOAuthViewController: UIViewController, FlutterPlugin {
 						FirebaseAuthOAuthPluginError
 							.FirebaseAuthError(error: firebaseError)
 					)
-				}
+					
+				}else
 				self.finalizeResult(Auth.auth().currentUser!)
 			}
 		}
