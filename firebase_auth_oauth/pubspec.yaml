@@ -10,8 +10,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_auth_oauth_platform_interface: ^0.2.1
-  firebase_auth_oauth_web: ^0.2.1
+  firebase_auth_oauth_platform_interface: 
+    git:
+      url: https://github.com/surielb/firebase_auth_oauth.git
+      path: firebase_auth_oauth_platform_interface
+  firebase_auth_oauth_web:
+    git:
+      url: https://github.com/surielb/firebase_auth_oauth.git
+      path: firebase_auth_oauth_web
   firebase_auth: ^0.20.0+1
   firebase_core: ^0.7.0
 
