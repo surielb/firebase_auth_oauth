@@ -26,8 +26,8 @@ class FirebaseAuthOAuthWeb implements FirebaseAuthOAuth {
       oAuthProvider.setCustomParameters(customOAuthParameters);
     }
     var res =await web.app(_app.name).auth().signInWithPopup(oAuthProvider);
-    if(res.credential is OAuthCredential && customOAuthParameters != null)
-      customOAuthParameters["access_token"]= (res.credential as OAuthCredential).accessToken;
+    if(res.credential?.accessToken != null)
+      customOAuthParameters["access_token"]= res.credential?.accessToken;
     return FirebaseAuth.instanceFor(app: _app).currentUser;
   }
 
