@@ -55,7 +55,11 @@ public class FirebaseAuthOAuthViewController: UIViewController, FlutterPlugin {
 					)
 					
 				}else{
-				self.finalizeResult(Auth.auth().currentUser!)
+                    var token = ""
+                    if let authCred = authResult?.credential as? OAuthCredential{
+                        token = authCred.accessToken ?? ""
+                    }
+				self.finalizeResult(Auth.auth().currentUser!,token: token)
 				}
 			}
 		}
@@ -69,23 +73,27 @@ public class FirebaseAuthOAuthViewController: UIViewController, FlutterPlugin {
 					self.finalizeResult(.FirebaseAuthError(error: error!))
 				}
 				if result != nil {
-					self.finalizeResult(currentUser)
+                    var token = ""
+                    if let authCred = credential as? OAuthCredential{
+                        token = authCred.accessToken ?? ""
+                    }
+					self.finalizeResult(currentUser,token: token)
 				}
 			}
 		}
 	}
 	
 	func finalizeResult(_ error: FirebaseAuthOAuthPluginError) {
-		finalizeResult(user: nil, error: error)
+        finalizeResult(user: nil, error: error,token:"")
 	}
 	
-	func finalizeResult(_ user: User) {
-		finalizeResult(user: user, error: nil)
+	func finalizeResult(_ user: User,token:String) {
+		finalizeResult(user: user, error: nil,token: token)
 	}
 	
-	private func finalizeResult(user: User?, error: FirebaseAuthOAuthPluginError?) {
+    private func finalizeResult(user: User?, error: FirebaseAuthOAuthPluginError?,token:String) {
 		if user != nil {
-			result?("")
+			result?(token)
 		}
 		
 		if error != nil {

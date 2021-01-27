@@ -4,6 +4,7 @@ import android.app.Activity
 import androidx.annotation.NonNull
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.OAuthCredential
 import com.google.firebase.auth.OAuthProvider
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -72,14 +73,21 @@ class FirebaseAuthOAuthPlugin : FlutterPlugin, ActivityAware, MethodCallHandler 
             } ?: FirebaseAuth.getInstance()
             val pending = auth.pendingAuthResult
             pending?.addOnSuccessListener {
-                result.success("")
+                var res = ""
+                if(it.credential is OAuthCredential)
+                    res = (it.credential as OAuthCredential).accessToken
+                result.success(res)
+
             }?.addOnFailureListener { error ->
                 FirebaseAuthOAuthPluginError
                     .FirebaseAuthError(error)
                     .toResult(result)
             } ?: auth.startActivityForSignInWithProvider(it, provider).addOnSuccessListener { authResult ->
                     if (call.method == CREATE_USER_METHOD) {
-                        result.success("")
+                        var res = ""
+                        if(authResult.credential is OAuthCredential)
+                            res = (authResult.credential as OAuthCredential).accessToken
+                        result.success(res)
                         return@addOnSuccessListener
                     } else if (call.method == LINK_USER_METHOD) {
                         val user = auth.currentUser
