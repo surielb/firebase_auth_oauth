@@ -16,10 +16,10 @@ dependencies:
     git:
       url: https://github.com/surielb/firebase_auth_oauth.git
       path: firebase_auth_oauth_platform_interface
-  firebase: ^7.3.0
+  firebase: ^9.0.0
   js: ^0.6.2
-  firebase_auth: ^0.20.0+1
-  firebase_core: ^0.7.0
+    firebase_auth: ^1.0.0
+  firebase_core: ^1.0.0
 
 dev_dependencies:
   flutter_test:
