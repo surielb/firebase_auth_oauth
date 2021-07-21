@@ -63,22 +63,20 @@ packages:
       name: firebase_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "3.0.1"
   firebase_auth_oauth_platform_interface:
     dependency: "direct main"
     description:
-      path: firebase_auth_oauth_platform_interface
-      ref: HEAD
-      resolved-ref: ebf1489c2c4028a4224bbe74991a8d229f624171
-      url: "https://github.com/surielb/firebase_auth_oauth.git"
-    source: git
+      path: "../firebase_auth_oauth_platform_interface"
+      relative: true
+    source: path
     version: "0.2.1"
   firebase_auth_oauth_web:
     dependency: "direct main"
     description:
       path: firebase_auth_oauth_web
       ref: HEAD
-      resolved-ref: ebf1489c2c4028a4224bbe74991a8d229f624171
+      resolved-ref: c12707467ff277d56cbe79776417761b32e9229c
       url: "https://github.com/surielb/firebase_auth_oauth.git"
     source: git
     version: "0.2.1"
@@ -88,14 +86,14 @@ packages:
       name: firebase_auth_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
+    version: "6.0.0"
   firebase_auth_web:
     dependency: transitive
     description:
       name: firebase_auth_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "3.0.0"
   firebase_core:
     dependency: "direct main"
     description:

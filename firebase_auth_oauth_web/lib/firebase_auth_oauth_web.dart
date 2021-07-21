@@ -17,44 +17,36 @@ class FirebaseAuthOAuthWeb implements FirebaseAuthOAuth {
   FirebaseAuthOAuthWeb._({FirebaseApp app}) : _app = app;
 
   @override
-  Future<User> openSignInFlow(String provider, List<String> scopes,
-      [Map<String, String> customOAuthParameters]) async {
+  Future<User?> openSignInFlow(String provider, List<String> scopes,
+      [Map<String, String>? customOAuthParameters]) async {
     _ensureAppInitialised();
     final oAuthProvider = web.OAuthProvider(provider);
     scopes.forEach((scope) => oAuthProvider.addScope(scope));
     if (customOAuthParameters != null) {
       oAuthProvider.setCustomParameters(customOAuthParameters);
     }
-    var res =await web.app(_app.name).auth().signInWithPopup(oAuthProvider);
-    if(res.credential?.accessToken != null)
-      customOAuthParameters["access_token"]= res.credential?.accessToken;
+    var res = await web.app(_app.name).auth().signInWithPopup(oAuthProvider);
+    if (res.credential?.accessToken != null)
+      customOAuthParameters["access_token"] = res.credential?.accessToken;
     return FirebaseAuth.instanceFor(app: _app).currentUser;
   }
 
   @override
-  Future<User> linkExistingUserWithCredentials(String provider,
-      List<String> scopes,
-      [Map<String, String> customOAuthParameters]) async {
+  Future<User?> linkExistingUserWithCredentials(
+      String provider, List<String> scopes,
+      [Map<String, String>? customOAuthParameters]) async {
     _ensureAppInitialised();
     final oAuthProvider = web.OAuthProvider(provider);
     scopes.forEach((scope) => oAuthProvider.addScope(scope));
     if (customOAuthParameters != null) {
       oAuthProvider.setCustomParameters(customOAuthParameters);
     }
-    if (FirebaseAuth
-        .instanceFor(app: _app)
-        .currentUser == null) {
+    if (FirebaseAuth.instanceFor(app: _app).currentUser == null) {
       return Future.error(StateError(
           "currentUser is nil. Make sure a user exists when linkExistingUserWithCredentials is used"));
     }
-    await web
-        .app(_app.name)
-        .auth()
-        .currentUser
-        .linkWithPopup(oAuthProvider);
-    return FirebaseAuth
-        .instanceFor(app: _app)
-        .currentUser;
+    await web.app(_app.name).auth().currentUser.linkWithPopup(oAuthProvider);
+    return FirebaseAuth.instanceFor(app: _app).currentUser;
   }
 
   @override

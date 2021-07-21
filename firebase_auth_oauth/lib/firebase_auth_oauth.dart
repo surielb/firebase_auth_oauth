@@ -8,7 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 class FirebaseAuthOAuth implements platform.FirebaseAuthOAuth {
   final platform.FirebaseAuthOAuth _delegate;
 
-  FirebaseAuthOAuth({FirebaseApp app})
+  FirebaseAuthOAuth({FirebaseApp? app})
       : _delegate = app != null
             ? platform.FirebaseAuthOAuth.instance.withApp(app)
             : platform.FirebaseAuthOAuth.instance;
