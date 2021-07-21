@@ -5,16 +5,16 @@ author: Amr Yousef <contact@amryousef.me>
 homepage: https://github.com/amrfarid140/firebase_auth_oauth/tree/master/firebase_auth_oauth_platform_interface
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
-
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.10.0"
 dependencies:
   flutter:
     sdk: flutter
-  firebase_auth: ^2.0.0
-  firebase_core: ^1.0.0
+  firebase_auth: ^3.0.1
+  firebase_core: ^1.4.0
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  pedantic: ^1.8.0
+  pedantic: ^1.11.1

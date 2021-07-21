@@ -12,27 +12,25 @@ class MethodChannelFirebaseAuthOAuth extends FirebaseAuthOAuth {
         super._();
 
   @override
-  Future<User> openSignInFlow(String provider, List<String> scopes,
-      [Map<String, String> customOAuthParameters]) async {
+  Future<User?> openSignInFlow(String provider, List<String> scopes,
+      [Map<String, String>? customOAuthParameters]) async {
     _ensureAppInitialised();
-    var result =await _channel.invokeMethod("openSignInFlow", {
+    var result = await _channel.invokeMethod("openSignInFlow", {
       'provider': provider,
       'app': _app.name,
       'scopes': json.encode(scopes),
       if (customOAuthParameters != null)
         'parameters': json.encode(customOAuthParameters)
     });
-    if(customOAuthParameters!=null)
+    if (customOAuthParameters != null)
       customOAuthParameters["access_token"] = result;
-    return FirebaseAuth
-        .instanceFor(app: _app)
-        .currentUser;
+    return FirebaseAuth.instanceFor(app: _app).currentUser;
   }
 
   @override
-  Future<User> linkExistingUserWithCredentials(String provider,
-      List<String> scopes,
-      [Map<String, String> customOAuthParameters]) async {
+  Future<User?> linkExistingUserWithCredentials(
+      String provider, List<String> scopes,
+      [Map<String, String>? customOAuthParameters]) async {
     _ensureAppInitialised();
     await _channel.invokeMethod("linkExistingUserWithCredentials", {
       'provider': provider,
@@ -41,9 +39,7 @@ class MethodChannelFirebaseAuthOAuth extends FirebaseAuthOAuth {
       if (customOAuthParameters != null)
         'parameters': json.encode(customOAuthParameters)
     });
-    return FirebaseAuth
-        .instanceFor(app: _app)
-        .currentUser;
+    return FirebaseAuth.instanceFor(app: _app).currentUser;
   }
 
   @override
